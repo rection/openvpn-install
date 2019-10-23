@@ -670,7 +670,6 @@ function installOpenVPN () {
 
 	# Workaround to remove unharmful error until easy-rsa 3.0.7
 	# https://github.com/OpenVPN/easy-rsa/issues/261
-	cd /etc/openvpn/easy-rsa/
 	sed -i 's/^RANDFILE/#RANDFILE/g' pki/openssl-easyrsa.cnf
 
 	# Create the PKI, set up the CA, the DH params and the server certificate
@@ -1142,7 +1141,7 @@ function removeOpenVPN () {
 	read -rp "Do you really want to remove OpenVPN? [y/n]: " -e -i n REMOVE
 	if [[ "$REMOVE" = 'y' ]]; then
 		# Get OpenVPN port from the configuration
-		PORT=$(grep '^port ' /etc/op	envpn/server.conf | cut -d " " -f 2)
+		PORT=$(grep '^port ' /etc/openvpn/server.conf | cut -d " " -f 2)
 
 		# Stop OpenVPN
 		if [[ "$OS" =~ (fedora|arch|centos) ]]; then
